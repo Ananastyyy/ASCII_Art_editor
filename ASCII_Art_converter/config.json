@@ -1,4 +1,10 @@
 {
   "images": "ASCII_Art_converter/images/",
-  "converted": "ASCII_Art_converter/images_converted/"
+  "converted": "ASCII_Art_converter/images_converted/",
+  "mode": "RGBA",
+  "ascii_chars": [
+    "@", "B", "%", "8", "#", "M", "H", "A", "Z", "X",
+    "M", "W", "N", "K", "D", "B", "O", "G", "L", "C",
+    "f", "t", "1", "i", "!", "l", "i", ";", ":", ",", ".", " "
+  ]
 }

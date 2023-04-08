@@ -5,13 +5,13 @@ from bestconfig import Config
 class Image:
 
     def __init__(self, name: str):
-        config = Config()
-        self.__image = Handler.open(f'{config.get("images")}{name}')
+        self.config = Config()
+        self.__image = Handler.open(f'{self.config.get("images")}{name}')
         self.__size = self.__image.size
 
     def get_pixels(self, new_size: tuple[int, int]):
         self.__image = self.__image.resize(new_size)
-        self.__image.convert(mode='RGBA')
+        self.__image.convert(mode=self.config.get("mode"))
         return self.__image.getdata()
 
     def get_size(self) -> tuple[int, int]:

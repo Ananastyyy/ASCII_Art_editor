@@ -1,7 +1,9 @@
+from bestconfig import Config
+
+
 class AsciiArt:
-    ascii_chars = ['@', 'B', '%', '8', '#', 'M', 'H', 'A', 'Z', 'X', 'M', 'W',
-                   'N', 'K', 'D', 'B', 'O', 'G', 'L', 'C', 'f', 't', '1', 'i',
-                   '!', 'l', 'i', ';', ':', ',', '.', ' ']
+    config = Config()
+    ascii_chars = config.get("ascii_chars")
 
     def __init__(self, width: int, height: int):
         self.__ascii_art = None
