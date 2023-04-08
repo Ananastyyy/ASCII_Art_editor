@@ -1,18 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>ASCII Art editor</title>
     <style>
+        canvas {
+            background-color: rgb(255, 255, 255);
+            cursor: crosshair;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid black;
+        }
+
         label {
             position: fixed;
             bottom: 100px;
+            left: 20%;
+            top: 65%;
+        }
+
+        button {
+            position: fixed;
+            left: 26.8%;
+            top: 90%;
         }
     </style>
 </head>
 <body>
-<canvas width="400" height="400" id="ascii-canvas"
-        style="background-color: rgb(255, 255, 255); cursor: crosshair; position: fixed; left: 0; top: 0;"></canvas>
+<canvas width="500" height="500" id="ascii-canvas"></canvas>
+<button id="save-button">Сохранить</button>
 <label for="symbol">Выберите символ:
     <select id="symbol">
         <option value="." selected>. (точка)</option>
@@ -37,11 +54,11 @@
     const ctx = canvas.getContext('2d');
     let isDragging = false;
 
-    canvas.addEventListener('mousedown', function (e) {
+    canvas.addEventListener('mousedown', function () {
         isDragging = true;
     });
 
-    canvas.addEventListener('mouseup', function (e) {
+    canvas.addEventListener('mouseup', function () {
         isDragging = false;
     });
 
@@ -53,6 +70,14 @@
 
     canvas.addEventListener('click', function (e) {
         handleCanvas(e)
+    });
+
+    const saveButton = document.getElementById('save-button');
+    saveButton.addEventListener('click', function () {
+        const link = document.createElement('a');
+        link.download = 'ascii_art.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
     });
 </script>
 </body>
