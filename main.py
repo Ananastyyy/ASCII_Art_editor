@@ -10,7 +10,7 @@ def main():
     name = textfile_handler.get_filename()
     ascii_art = AsciiArt(args.width, args.height)
     ascii_art.convert_brightness_to_ascii(
-        Image(f'ASCII_Art_converter/images/{name}.jpg')
+        Image(f'{name}.jpg')
         .get_pixels(ascii_art.get_size()))
 
     textfile_handler.create_textfile(

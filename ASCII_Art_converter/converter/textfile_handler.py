@@ -1,17 +1,20 @@
 import os
 import subprocess
+from bestconfig import Config
 
 
 class TextfileHandler:
 
     def __init__(self, filename: str) -> None:
+        config = Config()
+        self.converted_path = config.get("converted")
         self.__filename = filename
         self.__textfile_path = os.path.abspath(
-            f'ASCII_Art_converter/images_converted/{self.__filename}.txt')
+            f'{self.converted_path}{self.__filename}.txt')
 
     def create_textfile(self, text: str) -> None:
         try:
-            with open(f'ASCII_Art_converter/images_converted/'
+            with open(f'{self.converted_path}'
                       f'{self.__filename}.txt', 'w') as file:
                 file.write(text)
         except FileNotFoundError:

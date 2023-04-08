@@ -11,27 +11,49 @@
     </style>
 </head>
 <body>
-    <canvas width="400" height="400" id="ascii-canvas" style="background-color: rgb(255, 255, 255); cursor: crosshair; position: fixed; left: 0; top: 0;"></canvas>
-    <label for="symbol">Выберите символ:
+<canvas width="400" height="400" id="ascii-canvas"
+        style="background-color: rgb(255, 255, 255); cursor: crosshair; position: fixed; left: 0; top: 0;"></canvas>
+<label for="symbol">Выберите символ:
     <select id="symbol">
         <option value="." selected>. (точка)</option>
         <option value=",">, (запятая)</option>
         <option value="o">o (круг)</option>
         <option value="+">+ (плюс)</option>
         <option value="-">- (минус)</option>
+        <option value="@">@ (собака)</option>
     </select>
-    </label>
-    <script>
-        const canvas = document.getElementById('ascii-canvas');
-        const select = document.getElementById('symbol');
-        const ctx = canvas.getContext('2d');
-        canvas.addEventListener('click', function(e) {
-            const x = e.offsetX;
-            const y = e.offsetY;
-            const symbol = select.value;
-            ctx.font = '20px Arial';
-            ctx.fillText(symbol, x, y);
-        });
-    </script>
+</label>
+<script>
+    function handleCanvas(e) {
+        const x = e.offsetX;
+        const y = e.offsetY;
+        const symbol = select.value;
+        ctx.font = '20px Arial';
+        ctx.fillText(symbol, x, y);
+    }
+
+    const canvas = document.getElementById('ascii-canvas');
+    const select = document.getElementById('symbol');
+    const ctx = canvas.getContext('2d');
+    let isDragging = false;
+
+    canvas.addEventListener('mousedown', function (e) {
+        isDragging = true;
+    });
+
+    canvas.addEventListener('mouseup', function (e) {
+        isDragging = false;
+    });
+
+    canvas.addEventListener('mousemove', function (e) {
+        if (isDragging) {
+            handleCanvas(e)
+        }
+    });
+
+    canvas.addEventListener('click', function (e) {
+        handleCanvas(e)
+    });
+</script>
 </body>
 </html>
