@@ -1,6 +1,6 @@
 import unittest
 
-from converter.logic.ascii_art import AsciiArt
+from ASCII_Art_converter.converter.logic.ascii_art import AsciiArt
 
 
 class AsciiArtTests(unittest.TestCase):
@@ -22,17 +22,17 @@ class AsciiArtTests(unittest.TestCase):
     def test_convert_brightness_to_ascii(self):
         instance = AsciiArt(320, 240)
         pixels = [(255, 255, 255), (0, 0, 0), (127, 127, 127)]
-        expected_result = " @D"
+        expected_result = ' @D'
         instance.convert_brightness_to_ascii(pixels)
-        self.assertEqual("\n".join(instance.get_ascii_art_lines()),
+        self.assertEqual('\n'.join(instance.get_ascii_art_lines()),
                          expected_result)
 
     def test_convert_brightness_to_ascii_with_single_pixel(self):
         instance = AsciiArt(320, 240)
         pixels = [(100, 100, 100)]
-        expected_result = " "
+        expected_result = ' '
         instance.convert_brightness_to_ascii(pixels)
-        self.assertEqual("\n".join(instance.get_ascii_art_lines()),
+        self.assertEqual('\n'.join(instance.get_ascii_art_lines()),
                          expected_result)
 
     def test_get_size(self):

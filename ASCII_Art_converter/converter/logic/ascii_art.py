@@ -18,7 +18,7 @@ class AsciiArt:
 
     def convert_brightness_to_ascii(self, pixels: any):
         normalized_brightness = self.normalize_brightness(pixels)
-        ascii_image = "".join(
+        ascii_image = ''.join(
             [self.ascii_chars[int(value * (len(self.ascii_chars) - 1))]
              for value in normalized_brightness])
         self.__ascii_art = [ascii_image[i:i + self.__width]
