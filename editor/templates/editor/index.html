@@ -30,27 +30,35 @@
 <body>
 <canvas width="500" height="500" id="ascii-canvas"></canvas>
 <button id="save-button">Сохранить</button>
-<label for="symbol">Выберите символ:
-    <select id="symbol">
-        <option value="." selected>. (точка)</option>
-        <option value=",">, (запятая)</option>
-        <option value="o">o (круг)</option>
-        <option value="+">+ (плюс)</option>
-        <option value="-">- (минус)</option>
-        <option value="@">@ (собака)</option>
-    </select>
+<label for="symbol">Введите символ:
+    <input type="text" id="symbol" value="." maxlength="1" style="width: 20px;">
+    <input type="color" id="colorInput" value="#000000">
+    <span id="error-message" style="color: red; display: none;">Не ASCII</span>
 </label>
 <script>
     function handleCanvas(e) {
         const x = e.offsetX;
         const y = e.offsetY;
-        const symbol = select.value;
-        ctx.font = '20px Arial';
-        ctx.fillText(symbol, x, y);
+        const symbol = symbolInput.value;
+        if (isAsciiSymbol(symbol)) {
+            ctx.fillStyle = color.value;
+            ctx.font = '20px Arial';
+            ctx.fillText(symbol, x, y);
+            errorMessage.style.display = 'none';
+        } else {
+            errorMessage.style.display = 'inline';
+        }
+    }
+
+    function isAsciiSymbol(symbol) {
+        console.log(symbol.charCodeAt(0));
+        return symbol.charCodeAt(0) >= 32 && symbol.charCodeAt(0) <= 126;
     }
 
     const canvas = document.getElementById('ascii-canvas');
-    const select = document.getElementById('symbol');
+    const color = document.getElementById('colorInput');
+    const symbolInput = document.getElementById('symbol');
+    const errorMessage = document.getElementById('error-message');
     const ctx = canvas.getContext('2d');
     let isDragging = false;
 
