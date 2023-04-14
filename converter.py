@@ -9,9 +9,9 @@ def main():
     textfile_handler = TextfileHandler(args.name)
     name = textfile_handler.get_filename()
     ascii_art = AsciiArt(args.width, args.height)
-    ascii_art.convert_brightness_to_ascii(
+    ascii_art.convert_brightness_to_symbol(
         Image(f'{name}.jpg')
-        .get_pixels(ascii_art.get_size()))
+        .get_pixels(ascii_art.get_size()), args.mode)
 
     textfile_handler.create_textfile(ascii_art.get_ascii_art())
 
