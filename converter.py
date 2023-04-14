@@ -13,8 +13,7 @@ def main():
         Image(f'{name}.jpg')
         .get_pixels(ascii_art.get_size()))
 
-    textfile_handler.create_textfile(
-        "\n".join(ascii_art.get_ascii_art_lines()))
+    textfile_handler.create_textfile(ascii_art.get_ascii_art())
 
     textfile_handler.open_textfile()
 

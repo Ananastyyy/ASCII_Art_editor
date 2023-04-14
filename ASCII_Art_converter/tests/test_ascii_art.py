@@ -24,14 +24,14 @@ class AsciiArtTests(unittest.TestCase):
         pixels = [(255, 255, 255), (0, 0, 0), (127, 127, 127)]
         expected_result = ' @D'
         self.instance.convert_brightness_to_ascii(pixels)
-        self.assertEqual('\n'.join(self.instance.get_ascii_art_lines()),
+        self.assertEqual('\n'.join(self.instance.get_ascii_art()),
                          expected_result)
 
     def test_convert_brightness_to_ascii_with_single_pixel(self):
         pixels = [(100, 100, 100)]
         expected_result = ' '
         self.instance.convert_brightness_to_ascii(pixels)
-        self.assertEqual('\n'.join(self.instance.get_ascii_art_lines()),
+        self.assertEqual('\n'.join(self.instance.get_ascii_art()),
                          expected_result)
 
     def test_get_size(self):
@@ -42,7 +42,7 @@ class AsciiArtTests(unittest.TestCase):
         self.instance.convert_brightness_to_ascii(
             [(255, 255, 255), (0, 0, 0), (127, 127, 127)])
         expected_result = [' ', '@', 'D']
-        self.assertEqual(self.instance.get_ascii_art_lines(),
+        self.assertEqual(self.instance.get_ascii_art(),
                          expected_result)
 
 
