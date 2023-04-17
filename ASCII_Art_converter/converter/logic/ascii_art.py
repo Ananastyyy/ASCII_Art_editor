@@ -12,7 +12,7 @@ class AsciiArt:
 
     def __init__(self, width: int, height: int) -> None:
         self.__ascii_art = ""
-        self.__threshold = 64
+        self.__threshold = self.config.get("threshold")
         self.__width = width
         self.__height = height
 
