@@ -7,15 +7,15 @@ class TextfileHandler:
 
     def __init__(self, filename: str) -> None:
         config = Config()
-        self.__converted_path = config.get("converted")
-        self.__filename = filename
-        self.__textfile_path = os.path.abspath(
-            f"{self.__converted_path}{self.__filename}.txt")
+        self._converted_path = config.get("converted")
+        self._filename = filename
+        self._textfile_path = os.path.abspath(
+            f"{self._converted_path}{self._filename}.txt")
 
     def create_textfile(self, text: str) -> None:
         try:
-            with open(f"{self.__converted_path}"
-                      f"{self.__filename}.txt", "w") as file:
+            with open(f"{self._converted_path}"
+                      f"{self._filename}.txt", "w") as file:
                 file.write(text)
         except FileNotFoundError:
             print("FileNotFoundError: Не удалось создать ASCII_Art файл\n")
@@ -26,10 +26,10 @@ class TextfileHandler:
     def open_textfile(self) -> None:
         try:
             if os.name == "nt":
-                os.startfile(self.__textfile_path)
+                os.startfile(self._textfile_path)
             elif os.name == "posix":
                 subprocess.run(
-                    ["gnome-terminal", "--", "less", self.__textfile_path])
+                    ["gnome-terminal", "--", "less", self._textfile_path])
             else:
                 print("Ошибка: операционная система не поддерживается")
         except FileNotFoundError:
@@ -38,4 +38,4 @@ class TextfileHandler:
             print("IOError: Ошибка ввода-вывода. Не удалось открыть файл")
 
     def get_filename(self) -> str:
-        return self.__filename
+        return self._filename
