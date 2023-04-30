@@ -2,7 +2,7 @@ import argparse
 from bestconfig import Config
 
 
-def get_args():
+def get_args() -> argparse.Namespace:
     config = Config()
     width = config.get('width')
     height = config.get('height')

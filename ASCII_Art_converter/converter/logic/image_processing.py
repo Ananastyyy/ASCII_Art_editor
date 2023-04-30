@@ -4,12 +4,12 @@ from bestconfig import Config
 
 class Image:
 
-    def __init__(self, name: str):
+    def __init__(self, name: str) -> None:
         self.__config = Config()
         self.__image = Handler.open(f'{self.__config.get("images")}{name}')
         self.__size = self.__image.size
 
-    def get_pixels(self, new_size: tuple[int, int]):
+    def get_pixels(self, new_size: tuple[int, int]) -> tuple[tuple[int]]:
         self.__image = self.__image.resize(new_size)
         self.__image.convert(mode=self.__config.get("mode"))
         return self.__image.getdata()
