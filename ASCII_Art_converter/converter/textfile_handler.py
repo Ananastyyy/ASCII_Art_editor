@@ -7,14 +7,14 @@ class TextfileHandler:
 
     def __init__(self, filename: str) -> None:
         config = Config()
-        self.converted_path = config.get("converted")
+        self.__converted_path = config.get("converted")
         self.__filename = filename
         self.__textfile_path = os.path.abspath(
-            f'{self.converted_path}{self.__filename}.txt')
+            f'{self.__converted_path}{self.__filename}.txt')
 
     def create_textfile(self, text: str) -> None:
         try:
-            with open(f'{self.converted_path}'
+            with open(f'{self.__converted_path}'
                       f'{self.__filename}.txt', 'w') as file:
                 file.write(text)
         except FileNotFoundError:
