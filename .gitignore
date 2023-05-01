@@ -1,6 +1,7 @@
 .idea/
 *.jpg
 *.txt
+*.ini
 # Environments
 .env
 .venv

@@ -1,6 +1,14 @@
 import os
 import subprocess
 from bestconfig import Config
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename="errors.log",
+    format="%(asctime)s - %(module)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s",
+    datefmt='%H:%M:%S',
+)
 
 
 class TextfileHandler:
@@ -18,10 +26,9 @@ class TextfileHandler:
                       f"{self._filename}.txt", "w") as file:
                 file.write(text)
         except FileNotFoundError:
-            print("FileNotFoundError: Не удалось создать ASCII_Art файл\n")
+            logging.exception("FileNotFoundError: Не удалось создать Ascii_Art")
         except IOError:
-            print("IOError: Ошибка ввода-вывода. "
-                  "Не удалось создать файл с Ascii_Art\"ом\n")
+            logging.exception("IOError: Не удалось создать Ascii_Art")
 
     def open_textfile(self) -> None:
         try:
@@ -31,11 +38,11 @@ class TextfileHandler:
                 subprocess.run(
                     ["gnome-terminal", "--", "less", self._textfile_path])
             else:
-                print("Ошибка: операционная система не поддерживается")
+                logging.exception("Ошибка: Операционная система не поддерживается")
         except FileNotFoundError:
-            print("FileNotFoundError: Не удалось открыть файл")
+            logging.exception("FileNotFoundError: Не удалось открыть файл")
         except IOError:
-            print("IOError: Ошибка ввода-вывода. Не удалось открыть файл")
+            logging.exception("IOError: Не удалось открыть файл")
 
     def get_filename(self) -> str:
         return self._filename
