@@ -1,3 +1,4 @@
+from bestconfig import Config
 """
 Django settings for ASCII_Art_editor project.
 
@@ -15,12 +16,12 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+config = Config()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1dwu-!y7ufj!6z%%%6&6hh215s5_#wig$&_8y950mjz$go0ja5'
+SECRET_KEY = config.get("secret")["key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
