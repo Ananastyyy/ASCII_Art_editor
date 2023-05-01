@@ -1,50 +1,44 @@
-import unittest
+import pytest
+from colorama import Fore
 
 from ASCII_Art_converter.converter.logic.ascii_art import AsciiArt
 
+instance = AsciiArt(320, 240)
 
-class AsciiArtTests(unittest.TestCase):
+normalize_testdata = [
+    ([(255, 255, 255), (0, 0, 0), (127, 127, 127)], [1.0, 0.0, 0.45454545454545453]),
+    ([(100, 100, 100)], [1.0])
+]
 
-    def setUp(self) -> None:
-        self.instance = AsciiArt(320, 240)
+convert_to_symbol_testdata = [
+    ([(255, 255, 255), (0, 0, 0), (127, 127, 127)], "ascii", " @D"),
+    ([(100, 100, 100)], "ascii", " "),
+    ([(255, 255, 255), (0, 0, 0), (127, 127, 127)], "ansi", "\x1b[37m \x1b[30m@\x1b[30mD"),
+    ([(100, 100, 100)], "ansi", "\x1b[30m ")
+]
 
-    def test_normalize_brightness(self):
-        pixels = [(255, 255, 255), (0, 0, 0), (127, 127, 127)]
-        expected_result = [1.0, 0.0, 0.45454545454545453]
-        self.assertEqual(self.instance.normalize_brightness(pixels),
-                         expected_result)
-
-    def test_normalize_brightness_with_single_pixel(self):
-        pixels = [(100, 100, 100)]
-        expected_result = [1.0]
-        self.assertEqual(self.instance.normalize_brightness(pixels),
-                         expected_result)
-
-    def test_convert_brightness_to_ascii(self):
-        pixels = [(255, 255, 255), (0, 0, 0), (127, 127, 127)]
-        expected_result = ' @D'
-        self.instance.convert_brightness_to_ascii(pixels)
-        self.assertEqual('\n'.join(self.instance.get_ascii_art()),
-                         expected_result)
-
-    def test_convert_brightness_to_ascii_with_single_pixel(self):
-        pixels = [(100, 100, 100)]
-        expected_result = ' '
-        self.instance.convert_brightness_to_ascii(pixels)
-        self.assertEqual('\n'.join(self.instance.get_ascii_art()),
-                         expected_result)
-
-    def test_get_size(self):
-        expected_result = (320, 240)
-        self.assertEqual(self.instance.get_size(), expected_result)
-
-    def test_get_ascii_art_lines(self):
-        self.instance.convert_brightness_to_ascii(
-            [(255, 255, 255), (0, 0, 0), (127, 127, 127)])
-        expected_result = [' ', '@', 'D']
-        self.assertEqual(self.instance.get_ascii_art(),
-                         expected_result)
+rgb_to_ansi_testdata = [
+    (255, 255, 255, Fore.WHITE),
+    (0, 0, 0, Fore.BLACK),
+    (255, 0, 0, Fore.RED),
+    (0, 255, 0, Fore.GREEN),
+    (0, 0, 255, Fore.BLUE),
+    (255, 255, 0, Fore.YELLOW),
+    (0, 255, 255, Fore.CYAN),
+]
 
 
-if __name__ == '__main__':
-    unittest.main()
+@pytest.mark.parametrize("pixels, expected", normalize_testdata)
+def test_normalize_brightness(pixels, expected):
+    assert instance.normalize_brightness(pixels) == expected
+
+
+@pytest.mark.parametrize("pixels, mode, expected", convert_to_symbol_testdata)
+def test_convert_brightness_to_symbol(pixels, mode, expected):
+    instance.convert_brightness_to_symbol(pixels, mode)
+    assert instance.get_ascii_art() == expected
+
+
+@pytest.mark.parametrize("r, g, b, expected", rgb_to_ansi_testdata)
+def test_rgb_to_ansi(r, g, b, expected):
+    assert instance.rgb_to_ansi(r, g, b) == expected

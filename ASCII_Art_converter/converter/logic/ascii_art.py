@@ -34,6 +34,7 @@ class AsciiArt:
             int(value * (len(self._ascii_chars) - 1))]
 
     def convert_brightness_to_symbol(self, pixels: any, mode: str) -> None:
+        self._ascii_art = ""
         normalized_brightness = self.normalize_brightness(pixels)
         operation = self.ansi_symbol if mode == "ansi" else self.ascii_symbol
         for i, value in enumerate(normalized_brightness):
