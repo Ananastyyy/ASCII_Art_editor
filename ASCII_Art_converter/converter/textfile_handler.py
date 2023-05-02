@@ -6,7 +6,8 @@ import logging
 logging.basicConfig(
     level=logging.INFO,
     filename="errors.log",
-    format="%(asctime)s - %(module)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s",
+    format="%(asctime)s - %(module)s - %(levelname)s - "
+           "%(funcName)s: %(lineno)d - %(message)s",
     datefmt='%H:%M:%S',
 )
 
@@ -26,7 +27,8 @@ class TextfileHandler:
                       f"{self._filename}.txt", "w") as file:
                 file.write(text)
         except FileNotFoundError:
-            logging.exception("FileNotFoundError: Не удалось создать Ascii_Art")
+            logging.exception("FileNotFoundError: "
+                              "Не удалось создать Ascii_Art")
         except IOError:
             logging.exception("IOError: Не удалось создать Ascii_Art")
 
@@ -38,7 +40,8 @@ class TextfileHandler:
                 subprocess.run(
                     ["gnome-terminal", "--", "less", self._textfile_path])
             else:
-                logging.exception("Ошибка: Операционная система не поддерживается")
+                logging.exception("Ошибка: Операционная система"
+                                  " не поддерживается")
         except FileNotFoundError:
             logging.exception("FileNotFoundError: Не удалось открыть файл")
         except IOError:

@@ -10,7 +10,7 @@ class AsciiArt:
     _colors = {0: {0: {0: Fore.BLACK, 1: Fore.BLUE},
                    1: {0: Fore.GREEN, 1: Fore.CYAN}},
                1: {0: {0: Fore.RED, 1: Fore.MAGENTA},
-                  1: {0: Fore.YELLOW, 1: Fore.WHITE}}}
+                   1: {0: Fore.YELLOW, 1: Fore.WHITE}}}
 
     def __init__(self, width: int, height: int) -> None:
         self._ascii_art = ""
@@ -38,7 +38,8 @@ class AsciiArt:
     def convert_brightness_to_symbol(self, pixels: any, mode: Mode) -> None:
         self._ascii_art = ""
         normalized_brightness = self.normalize_brightness(pixels)
-        operation = self.ansi_symbol if mode == Mode.ANSI else self.ascii_symbol
+        operation = self.ansi_symbol if mode == Mode.ANSI \
+            else self.ascii_symbol
         for i, value in enumerate(normalized_brightness):
             char = operation(pixels[i], value)
             if (i + 1) % self.__width == 0:
