@@ -2,6 +2,7 @@ import pytest
 from colorama import Fore
 
 from ASCII_Art_converter.converter.logic.ascii_art import AsciiArt
+from ASCII_Art_converter.converter.logic.mode import Mode
 
 instance = AsciiArt(320, 240)
 
@@ -11,10 +12,10 @@ normalize_testdata = [
 ]
 
 convert_to_symbol_testdata = [
-    ([(255, 255, 255), (0, 0, 0), (127, 127, 127)], "ascii", " @D"),
-    ([(100, 100, 100)], "ascii", " "),
-    ([(255, 255, 255), (0, 0, 0), (127, 127, 127)], "ansi", "\x1b[37m \x1b[30m@\x1b[30mD"),
-    ([(100, 100, 100)], "ansi", "\x1b[30m ")
+    ([(255, 255, 255), (0, 0, 0), (127, 127, 127)], Mode.ASCII, " @D"),
+    ([(100, 100, 100)], Mode.ASCII, " "),
+    ([(255, 255, 255), (0, 0, 0), (127, 127, 127)], Mode.ANSI, "\x1b[37m \x1b[30m@\x1b[30mD"),
+    ([(100, 100, 100)], Mode.ANSI, "\x1b[30m ")
 ]
 
 rgb_to_ansi_testdata = [

@@ -34,7 +34,7 @@ class Image:
 
     def get_pixels(self, new_size: tuple[int, int]) -> tuple[tuple[int]]:
         self._image = self._image.resize(new_size)
-        self._image.convert(mode=self._config.get("mode"))
+        self._image.convert(mode=self._config.get("image_mode"))
         return self._image.getdata()
 
     def get_size(self) -> tuple[int, int]:

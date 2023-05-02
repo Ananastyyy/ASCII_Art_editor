@@ -1,6 +1,8 @@
 from bestconfig import Config
 from colorama import Fore
 
+from ASCII_Art_converter.converter.logic.mode import Mode
+
 
 class AsciiArt:
     _config = Config()
@@ -33,10 +35,10 @@ class AsciiArt:
         return self.rgb_to_ansi(*pixels) + self._ascii_chars[
             int(value * (len(self._ascii_chars) - 1))]
 
-    def convert_brightness_to_symbol(self, pixels: any, mode: str) -> None:
+    def convert_brightness_to_symbol(self, pixels: any, mode: Mode) -> None:
         self._ascii_art = ""
         normalized_brightness = self.normalize_brightness(pixels)
-        operation = self.ansi_symbol if mode == "ansi" else self.ascii_symbol
+        operation = self.ansi_symbol if mode == Mode.ANSI else self.ascii_symbol
         for i, value in enumerate(normalized_brightness):
             char = operation(pixels[i], value)
             if (i + 1) % self.__width == 0:

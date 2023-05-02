@@ -1,6 +1,7 @@
 from ASCII_Art_converter.converter.arg_handler import get_args
 from ASCII_Art_converter.converter.logic.ascii_art import AsciiArt
 from ASCII_Art_converter.converter.logic.image_processing import Image
+from ASCII_Art_converter.converter.logic.mode import Mode
 from ASCII_Art_converter.converter.textfile_handler import TextfileHandler
 
 
@@ -11,7 +12,7 @@ def main() -> None:
     ascii_art = AsciiArt(args.width, args.height)
     ascii_art.convert_brightness_to_symbol(
         Image(name)
-        .get_pixels(ascii_art.get_size()), args.mode)
+        .get_pixels(ascii_art.get_size()), Mode(args.mode))
 
     textfile_handler.create_textfile(ascii_art.get_ascii_art())
 

@@ -1,7 +1,7 @@
 {
   "images": "ASCII_Art_converter/images/",
   "converted": "ASCII_Art_converter/images_converted/",
-  "mode": "RGB",
+  "image_mode": "RGB",
   "ascii_chars": [
     "@", "B", "%", "8", "#", "M", "H", "A", "Z", "X",
     "M", "W", "N", "K", "D", "B", "O", "G", "L", "C",
